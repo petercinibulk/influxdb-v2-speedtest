@@ -1,0 +1,36 @@
+version: "3.5"
+
+services:
+    influxdb:
+        image: influxdb:2.0.7
+        container_name: influxdb
+        restart: always
+        volumes:
+            - influxdb-volume:/var/lib/influxdb
+        ports:
+            - "8086:8086"
+        environment:
+            - DOCKER_INFLUXDB_INIT_MODE=setup
+            - DOCKER_INFLUXDB_INIT_USERNAME=admin
+            - DOCKER_INFLUXDB_INIT_PASSWORD=adminpassword
+            - DOCKER_INFLUXDB_INIT_ORG=speedtest
+            - DOCKER_INFLUXDB_INIT_BUCKET=speedtest
+            - DOCKER_INFLUXDB_INIT_RETENTION=1w
+            - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=token
+
+    speedtest:
+        image: influxdb-v2-speedtest:latest
+        build:
+            context: ./
+            dockerfile: dockerfile
+        depends_on:
+            - influxdb
+        environment: 
+            - INFLUXDB_URL=http://influxdb:8086
+            - INFLUXDB_TOKEN=token
+            - INFLUXDB_ORG=speedtest
+            - INFLUXDB_BUCKET=speedtest
+        restart: always
+
+volumes:
+    influxdb-volume:

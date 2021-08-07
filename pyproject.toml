@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "influxdb-v2-speedtest"
+version = "0.1.0"
+description = ""
+authors = ["Peter Cinibulk"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pydantic = "^1.8.2"
+influxdb-client = "^1.19.0"
+tenacity = "^8.0.1"
+speedtest-cli = "^2.1.3"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+flake8 = "^3.9.2"
+autopep8 = "^1.5.7"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
