@@ -47,6 +47,12 @@ volumes:
 - INFLUXDB_BUCKET: Required. The bucket for InfluxDB
 - TIMEOUT_IN_SEC: Optional. The timeout after running the speedtest. Defaults to 15 minutes
 
+## Develeopment
+
+Run:
+```poetry export -f requirements.txt --output requirements.txt --without-hashes```
+when there is a change to dependencies so the docker image can be created without poetry to reduce size
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE)
